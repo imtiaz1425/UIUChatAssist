@@ -1,7 +1,7 @@
 import json
 import faiss
 import numpy as np
-from sentence_transformers import SentenceTransformer
+from onnx_embedder import ONNXEmbeddingModel
 
 
 def load_data(index_path, metadata_path):
@@ -26,7 +26,7 @@ def main():
     model_name = "all-MiniLM-L6-v2"
 
     index, metadata = load_data(index_path, metadata_path)
-    model = SentenceTransformer(model_name)
+    model = ONNXEmbeddingModel()
 
     query = input("Enter your question: ")
     scores, indices, metadata = search_query(index, metadata, model, query)

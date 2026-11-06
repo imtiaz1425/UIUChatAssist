@@ -1,5 +1,6 @@
 # ==========================================
-# UIU ChatAssist - Python Dependencies
+# UIU ChatAssist - Production Python Dependencies
+# Lightweight CPU Inference (Zero PyTorch, <512 MB RAM)
 # Compatible with Python 3.10 - 3.12+
 # ==========================================
 
@@ -10,14 +11,12 @@ gunicorn>=21.2.0
 # LLM Inference (Groq Cloud API)
 groq>=0.9.0
 
-# Vector Embeddings & Similarity Search
-sentence-transformers>=3.0.0
+# Lightweight Vector Search & ONNX CPU Embeddings (Zero PyTorch)
+onnxruntime>=1.17.0
+tokenizers>=0.15.0
 faiss-cpu>=1.8.0
 numpy>=1.26.0
 
-# Environment & Configuration Management
+# Environment & Network Utilities
 python-dotenv>=1.0.0
-
-# Web Crawling & Scraping Pipeline
-Scrapy>=2.11.0
 requests>=2.31.0

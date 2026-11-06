@@ -81,3 +81,7 @@ scratch/
 .scratch/
 tmp/
 
+# Large Model Binaries (Auto-downloaded during build)
+models/
+*.onnx
+

@@ -8,7 +8,7 @@ import groq
 import numpy as np
 from flask import Flask, jsonify, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
-from sentence_transformers import SentenceTransformer
+from onnx_embedder import ONNXEmbeddingModel
 from dotenv import load_dotenv
 
 # Load environment variables from .env
@@ -25,8 +25,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATABASE_PATH = os.path.join(BASE_DIR, "users.db")
 EMAIL_PATTERN = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 
-INDEX_PATH = "data/vector_store/faiss_index.index"
-METADATA_PATH = "data/embeddings/metadata.json"
+INDEX_PATH = os.path.join(BASE_DIR, "data", "vector_store", "faiss_index.index")
+METADATA_PATH = os.path.join(BASE_DIR, "data", "embeddings", "metadata.json")
 MODEL_NAME = "all-MiniLM-L6-v2"
 
 faiss_index = None
@@ -261,9 +261,9 @@ def load_rag_resources():
         print(f"Loaded {len(chunk_metadata)} chunk metadata records")
 
     if embedding_model is None:
-        print(f"Loading embedding model: {MODEL_NAME}")
-        embedding_model = SentenceTransformer(MODEL_NAME)
-        print("Embedding model loaded")
+        print(f"Loading lightweight ONNX embedding model: {MODEL_NAME}")
+        embedding_model = ONNXEmbeddingModel()
+        print("ONNX Embedding model loaded")
 
     if groq_client is None:
         api_key = GROQ_API_KEY
