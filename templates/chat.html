@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - UIU ChatAssist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-section">
+                <img src="{{ url_for('static', filename='images/uiu.jpg') }}" alt="UIU Logo" class="logo">
+                <div class="logo-text">
+                    <h1>UIU ChatAssist</h1>
+                    <p>AI Campus Helpline</p>
+                </div>
+            </div>
+
+            <button id="newChatBtn" class="new-chat-btn top-btn" type="button">
+                <i class="fas fa-plus"></i> New Chat
+            </button>
+
+            <section class="recent-chats-section">
+                <p class="menu-label">RECENT CHATS</p>
+                <div id="recentChatsList" class="recent-chats-list"></div>
+            </section>
+
+            <div class="sidebar-footer">
+                <a class="footer-item help-link" href="https://www.uiu.ac.bd/contact-us/" target="_blank" rel="noopener noreferrer"><i class="fas fa-question-circle"></i> Help & Contact</a>
+                <a class="footer-item logout-link" href="{{ url_for('logout') }}"><i class="fas fa-right-from-bracket"></i> Logout</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div id="portalStatus" class="status-indicator">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Connecting to Knowledge Base...</span>
+                </div>
+                <div class="header-icons">
+                    <div class="user-profile-wrapper">
+                        <button id="profileDropdownBtn" class="user-profile-btn" type="button" aria-expanded="false" aria-label="User Profile">
+                            <img src="https://ui-avatars.com/api/?name={{ full_name|default('User')|urlencode }}&background=0D8ABC&color=fff" alt="User" class="user-avatar">
+                        </button>
+                        <div id="profileDropdown" class="profile-dropdown" style="display: none;">
+                            <div class="profile-dropdown-header">
+                                <div class="profile-name">{{ full_name|default('User') }}</div>
+                                <span class="profile-role-badge">Student Account</span>
+                            </div>
+                            <div class="profile-dropdown-body">
+                                <div class="profile-info-row">
+                                    <i class="far fa-id-card"></i>
+                                    <div class="profile-info-content">
+                                        <span class="info-label">University ID</span>
+                                        <span class="info-value">{{ university_id|default('N/A') }}</span>
+                                    </div>
+                                </div>
+                                <div class="profile-info-row">
+                                    <i class="far fa-envelope"></i>
+                                    <div class="profile-info-content">
+                                        <span class="info-label">Registered Email</span>
+                                        <span class="info-value">{{ email|default('student@uiu.ac.bd') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="profile-dropdown-footer">
+                                <a href="{{ url_for('logout') }}" class="dropdown-logout-btn">
+                                    <i class="fas fa-right-from-bracket"></i> Log Out
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div id="welcomeContainer" class="welcome-container">
+                <section class="welcome-section">
+                    <h1>Welcome to UIU ChatAssist. <br><span class="highlight">How can I help you today?</span></h1>
+                    <p>Your intelligent guide to campus life, academics, and administrative resources.</p>
+                </section>
+
+                <div class="quick-cards">
+                    <div id="financialCard" class="card suggestion-card" data-query="Show me information about tuition fees and financial matters.">
+                        <div class="card-icon green-bg"><i class="fas fa-money-bill-wave"></i></div>
+                        <h3>Financial Queries</h3>
+                        <p>"Can you show me the tuition fee breakdown for International Students?"</p>
+                    </div>
+                    <div id="academicCalendarCard" class="card suggestion-card" data-query="When are the final examinations and academic events scheduled for the semester?">
+                        <div class="card-icon purple-bg"><i class="fas fa-calendar-alt"></i></div>
+                        <h3>Academic Calendar</h3>
+                        <p>"When are the final examinations scheduled for the Fall semester?"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div id="chat-box" class="chat-box"></div>
+                <div id="loadingSpinner" class="typing-indicator" style="display: none;">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <span class="typing-text">UIU ChatAssist is thinking...</span>
+                </div>
+                <div class="chat-input-wrapper">
+                    <input type="text" id="userInput" placeholder="Type your question about UIU here...">
+                    <button class="send-btn" type="button" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <div class="disclaimer">
+                    <span>AI-Generated Responses</span> • <span>UIU Official Database</span> • <span>Privacy Secured</span>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - UIU ChatAssist</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="register-body">
+    <div class="register-container">
+        <!-- Sidebar Info Section -->
+        <aside class="register-sidebar">
+            <div class="sidebar-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>UIU ChatAssist</span>
+            </div>
+            
+            <div class="sidebar-content">
+                <h1>Join the Future of Campus Intelligence.</h1>
+                <p>Access academic information, location assistance, and administrative support with our AI-powered student companion.</p>
+                
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <div>
+                        <strong>Admissions & Tuition Waivers</strong>
+                        <p>Real-time admission requirements, tuition fee structures, and scholarship criteria.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-chalkboard-teacher"></i></div>
+                    <div>
+                        <strong>Faculty & Departments</strong>
+                        <p>Official faculty profiles, department directories, room designations, and contact emails.</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div>
+                        <strong>Academic Calendars & Campus Life</strong>
+                        <p>Trimester schedules, exam timetables, campus office locations, and student helplines.</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Form Section -->
+        <main class="register-form-section">
+            <div class="form-header">
+                <h2>Create Account</h2>
+                <p>Enter your details to register for the campus portal.</p>
+            </div>
+
+            {% if error %}
+            <div class="form-error">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('register') }}">
+                <div class="input-group">
+                    <label for="full_name">FULL NAME</label>
+                    <div class="input-wrapper">
+                        <i class="far fa-user"></i>
+                        <input type="text" id="full_name" name="full_name" placeholder="John Doe" value="{{ request.form.get('full_name', '') }}" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="university_id">UNIVERSITY ID</label>
+                        <div class="input-wrapper">
+                            <i class="far fa-id-card"></i>
+                            <input type="text" id="university_id" name="university_id" placeholder="011 221 XXX" value="{{ request.form.get('university_id', '') }}" required>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">UNIVERSITY EMAIL</label>
+                        <div class="input-wrapper">
+                            <i class="far fa-envelope"></i>
+                            <input type="email" id="email" name="email" placeholder="student@uiu.ac.bd" value="{{ request.form.get('email', '') }}" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">PASSWORD</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm_password">CONFIRM PASSWORD</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-shield-alt"></i>
+                        <input type="password" id="confirm_password" name="confirm_password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="terms-group">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="javascript:void(0)" onclick="openModal('termsModal')">Terms of Service</a> and <a href="javascript:void(0)" onclick="openModal('privacyModal')">Privacy Policy</a>.</label>
+                </div>
+
+                <button type="submit" class="register-btn">Register →</button>
+            </form>
+
+            <div class="login-link">
+                Already have an account? <a href="{{ url_for('login') }}">Login</a>
+            </div>
+        </main>
+    </div>
+
+    <!-- Terms Modal -->
+    <div id="termsModal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Terms of Service</h3>
+                <button type="button" class="modal-close" onclick="closeModal('termsModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>1. Acceptable Use:</strong> UIU ChatAssist is an AI campus guide intended for United International University students, faculty, and administrative staff to query university information.</p>
+                <p><strong>2. Academic Integrity:</strong> The assistant provides guidance on publicly available UIU academic policies, courses, schedules, and faculty contacts. It must not be used for malicious activities or unauthorized system probing.</p>
+                <p><strong>3. Informational Purpose:</strong> All answers are generated using official university portal information. For formal administrative decisions, always verify with the relevant UIU department or Registrar's office.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="modal-btn" onclick="closeModal('termsModal')">Understood</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Modal -->
+    <div id="privacyModal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>Privacy Policy</h3>
+                <button type="button" class="modal-close" onclick="closeModal('privacyModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>1. Data Collection:</strong> We collect your full name, student university ID, and official university email solely to authenticate access and personalize your campus experience.</p>
+                <p><strong>2. Security:</strong> Passwords are cryptographically hashed using standard salted hashes before storage. Plaintext passwords are never saved or exposed.</p>
+                <p><strong>3. Chat Records:</strong> Conversation logs are stored securely in the local campus database to allow you to review previous chats. Your data is not sold or shared with third parties.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="modal-btn" onclick="closeModal('privacyModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-footer">
+        © <span id="currentYear"></span> UIU ChatAssist. All academic rights reserved. United International University.
+    </div>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            if (modal) modal.style.display = 'none';
+        }
+
+        window.addEventListener('click', function(e) {
+            ['termsModal', 'privacyModal'].forEach(function(id) {
+                const modal = document.getElementById(id);
+                if (modal && e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

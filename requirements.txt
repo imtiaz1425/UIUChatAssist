@@ -1,0 +1,22 @@
+# ==========================================
+# UIU ChatAssist - Python Dependencies
+# Compatible with Python 3.10 - 3.12+
+# ==========================================
+
+# Web Application Framework
+Flask>=3.0.0
+
+# LLM Inference (Groq Cloud API)
+groq>=0.9.0
+
+# Vector Embeddings & Similarity Search
+sentence-transformers>=3.0.0
+faiss-cpu>=1.8.0
+numpy>=1.26.0
+
+# Environment & Configuration Management
+python-dotenv>=1.0.0
+
+# Web Crawling & Scraping Pipeline
+Scrapy>=2.11.0
+requests>=2.31.0
