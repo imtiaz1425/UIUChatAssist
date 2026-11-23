@@ -362,7 +362,7 @@ This project is licensed under the **MIT License** — see the [LICENSE](LICENSE
 
 ## 👨‍💻 15. Author & Acknowledgments
 
-- **Developer:** [Your Name / Portfolio Link](https://github.com/your-username)
+- **Developer:** Imthiyaz Ahmed | [GitHub Profile](https://github.com/imtiaz1425)
 - **Institution:** United International University (UIU), Dhaka, Bangladesh
 - **Department:** Department of Computer Science & Engineering (CSE)
 
