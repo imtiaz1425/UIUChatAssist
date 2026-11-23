@@ -1,6 +1,8 @@
 # UIU ChatAssist 🎓🤖
 ### Intelligent Retrieval-Augmented Generation (RAG) Academic Assistant for United International University
 
+[🚀 Live Demo](https://uiuchatassist.onrender.com) | [GitHub Repository](https://github.com/imtiaz1425/UIUChatAssist)
+
 [![Python](https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![Flask](https://img.shields.io/badge/Flask-3.0+-black?logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
 [![Groq](https://img.shields.io/badge/Groq-openai%2Fgpt--oss--120b-orange)](https://groq.com/)
